@@ -33,3 +33,12 @@
 
 # Dataset
 *.csv
+
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+.DS_Store
+
