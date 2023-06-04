@@ -11,16 +11,20 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "../src/data_processing.cpp"
+#include "../include/rapidjson/document.h"
 
 class DataProcessor {
 public:
     std::vector<std::vector<double>> readData(const std::string& filename);
+    rapidjson::Document readJson(const std::string &filePath);
 
 private:
     std::vector<std::string> readListOfStringsFromFile(const std::string& filename);
     std::vector<std::string> fileNames(const std::string& filename);
     std::vector<std::vector<double>> readDataFrame(const std::vector<std::string>& filenames);
 };
+
+#include "../src/data_processing.cpp"
+
 
 #endif // DATA_PROCESSING_H

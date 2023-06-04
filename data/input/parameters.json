@@ -2,5 +2,6 @@
     "year_start": 1600,
     "year_end": 1999,
     "window": 20,
-    "sample_size": 10
+    "sample_size_words": 500,
+    "sample_size_time": 10
 }

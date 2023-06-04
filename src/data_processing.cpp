@@ -1,4 +1,7 @@
-std::vector<std::string> readListOfStringsFromFile(const std::string &filename)
+#include "../include/rapidjson/document.h"
+#include "../include/data_processing.h"
+
+std::vector<std::string> DataProcessor::readListOfStringsFromFile(const std::string &filename)
 {
     std::vector<std::string> strings;
     std::ifstream file(filename);
@@ -18,7 +21,7 @@ std::vector<std::string> readListOfStringsFromFile(const std::string &filename)
     return strings;
 }
 
-std::vector<std::string> fileNames(const std::string &filename)
+std::vector<std::string> DataProcessor::fileNames(const std::string &filename)
 {
     std::vector<std::string> names = readListOfStringsFromFile(std::string(COMMON_PATH_INPUT) + filename);
 
@@ -32,7 +35,7 @@ std::vector<std::string> fileNames(const std::string &filename)
     return filenames;
 }
 
-std::vector<std::vector<double>> readDataFrame(const std::vector<std::string> &filenames)
+std::vector<std::vector<double>> DataProcessor::readDataFrame(const std::vector<std::string> &filenames)
 {
     std::vector<std::vector<double>> dataframe;
 
@@ -79,6 +82,34 @@ std::vector<std::vector<double>> readDataFrame(const std::vector<std::string> &f
     return dataframe;
 }
 
-std::vector<std::vector<double>> readData(const std::string& filename) {
+std::vector<std::vector<double>> DataProcessor::readData(const std::string& filename) {
     return readDataFrame(fileNames(filename));
+}
+
+rapidjson::Document DataProcessor::readJson(const std::string &filePath)
+{
+    std::ifstream file(filePath);
+    if (!file.is_open())
+    {
+        std::cout << "Failed to open file." << std::endl;
+        // You might want to handle this error case differently
+        throw std::runtime_error("Failed to open file: " + filePath);
+    }
+
+    // Read the file content into a string
+    std::string jsonData((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
+    // Parse the JSON string
+    rapidjson::Document document;
+    document.Parse(jsonData.c_str());
+
+    // Check if parsing succeeded
+    if (document.HasParseError())
+    {
+        std::cout << "Failed to parse JSON." << std::endl;
+        // You might want to handle this error case differently
+        throw std::runtime_error("Failed to parse JSON: " + filePath);
+    }
+
+    return document;
 }
