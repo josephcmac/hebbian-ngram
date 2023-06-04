@@ -20,13 +20,13 @@ std::vector<std::string> readListOfStringsFromFile(const std::string &filename)
 
 std::vector<std::string> fileNames(const std::string &filename)
 {
-    std::vector<std::string> names = readListOfStringsFromFile(std::string(commonPathInput) + filename);
+    std::vector<std::string> names = readListOfStringsFromFile(std::string(COMMON_PATH_INPUT) + filename);
 
     std::vector<std::string> filenames;
 
     for (const auto &name : names)
     {
-        filenames.emplace_back(std::string(commonPathAuxiliary) + name + ".csv");
+        filenames.emplace_back(std::string(COMMON_PATH_AUXILIARY) + name + ".csv");
     }
 
     return filenames;

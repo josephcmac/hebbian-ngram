@@ -2,8 +2,8 @@
 #define DATA_PROCESSING_H
 
 
-#define commonPathInput "../data/input/"
-#define commonPathAuxiliary "../data/auxiliary/"
+#define COMMON_PATH_INPUT "../data/input/"
+#define COMMON_PATH_AUXILIARY "../data/auxiliary/"
 
 
 #include <vector>
