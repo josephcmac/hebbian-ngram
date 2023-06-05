@@ -103,6 +103,7 @@ This project is structured as follows:
 project/
 ├── bin/
 │   ├── main (compiled)
+│   └── run_tests (compiled)
 ├── src/
 │   ├── main.cpp
 │   ├── data_processing.cpp
@@ -114,10 +115,10 @@ project/
 │   └── utilities.h
 ├── data/
 │   ├── input/
-│   │   ├── dataset.csv
+│   │   └── ...
+│   ├── auxiliary/
 │   │   └── ...
 │   └── output/
-│       ├── results.csv
 │       └── ...
 ├── r/
 │   ├── script.R
@@ -125,8 +126,9 @@ project/
 ├── test/
 │   └── utilities_test.cpp
 │   └── ...
-├── README.md
-└── run_tests (compiled)
+├── Makefile
+└── README.md
+
 ```
 
 ### `/src`
