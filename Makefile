@@ -10,7 +10,7 @@ TESTS = $(wildcard $(TEST_DIR)*.cpp)
 
 # other variables
 TARGET = bin/main
-TEST_TARGET = run_tests
+TEST_TARGET = bin/run_tests
 
 # default target
 all: $(TARGET)
@@ -23,6 +23,10 @@ $(TARGET): $(SRCS) $(HDRS)
 $(TEST_TARGET): $(TESTS) $(SRCS) $(HDRS)
 	$(CXX) -I ./include -o $(TEST_DIR)utilities_test.o -c $(TEST_DIR)utilities_test.cpp
 	$(CXX) -o $(TEST_TARGET) $(SRC_DIR)utilities.cpp $(TEST_DIR)utilities_test.o -lgtest -lgtest_main -pthread
+
+# run tests target
+run_tests: $(TEST_TARGET)
+	./$(TEST_TARGET)
 
 # clean target
 clean:

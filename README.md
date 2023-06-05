@@ -85,14 +85,17 @@ CONDITIONS OF ANY KIND, either express or implied. See the License for the
 specific language governing permissions and limitations under the License.
 ```
 
-
 ## Testing
 After ensuring GoogleTest is properly installed in your environment, you can compile and run the tests in the project root directory:
 
 ```sh
 make run_tests
-./run_tests
+./bin/run_tests
 ```
+
+The `make run_tests` command will build the test target and generate the `bin/run_tests` executable. The subsequent `./bin/run_tests` command will execute the tests and display the test results.
+
+Make sure to replace `make run_tests` with the appropriate command to invoke your build system if you're not using `make` as your build tool.
 
 ## Project Structure
 This project is structured as follows:
