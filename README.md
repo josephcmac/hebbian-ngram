@@ -29,18 +29,20 @@ This project provides a research framework to study the Hebb-Jorion Law, a new c
 ### Installation
 1. Clone the repo.
 ```sh
-git clone https://github.com/<your username>/Hebb-Jorion.git
+git clone https://github.com/josephcmac/Hebb-Jorion.git
 ```
 2. Navigate to the `r/` directory and run `script.R` to extract N-gram data.
 
 ## Usage
-The C++ code can be compiled and run from the `build/` directory:
+The C++ code can be compiled and run from the project root directory:
 1. Compile the project:
 ```sh
 make
 ```
+
 2. Run the compiled executable:
 ```sh
+cd bin
 ./main
 ```
 
@@ -85,7 +87,7 @@ specific language governing permissions and limitations under the License.
 
 
 ## Testing
-After ensuring GoogleTest is properly installed in your environment, you can compile and run the tests:
+After ensuring GoogleTest is properly installed in your environment, you can compile and run the tests in the project root directory:
 
 ```sh
 make run_tests
@@ -120,7 +122,6 @@ project/
 ├── test/
 │   └── utilities_test.cpp
 │   └── ...
-├── build/
 ├── README.md
 └── run_tests (compiled)
 ```
@@ -180,10 +181,6 @@ This folder contains the results from the model after testing.
 
 This folder contains `script.R`, an R script that extracts N-gram data for specific words.
 
-### `/build`
-
-This folder is used to store all the build files for the project.
-
 ### `/test`
 
 This folder contains unit tests for the utility functions implemented in `utilities.cpp`.
@@ -203,8 +200,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - Kendall, Maurice G. [A new measure of rank correlation.](https://www.jstor.org/stable/2332226) Biometrika 30.1/2 (1938): 81-93.
 
 - Spearman, Charles. [The proof and measurement of association between two things.](https://psycnet.apa.org/record/2006-10257-005) The American journal of psychology 100.3/4 (1987): 441-471.
-
-
 
 
 ## External Links
