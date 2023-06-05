@@ -10,10 +10,10 @@ class Utilities
 {
 public:
     double findMedian(const std::vector<double>& list);
+    double syncategorematic_median(const unsigned int &t, const std::vector<std::vector<double>> &syn);
     size_t mergeSubarraysAndCountInversions(std::vector<std::pair<double, double>>& arr, size_t start, size_t middle, size_t end);
     size_t countInversionsWithMergeSort(std::vector<std::pair<double, double>> &arr, size_t start, size_t end);
     double kendall_tau(const std::vector<double> &x, const std::vector<double> &y);
-    double syncategorematic_median(const unsigned int &t, const std::vector<std::vector<double>> &syn);
     double fire(const unsigned int &i, const unsigned int &j, const unsigned int &t,
                 const std::vector<std::vector<double>> &cat, const double &mSq);
     double wire(const unsigned int &i, const unsigned int &j, const double &t,

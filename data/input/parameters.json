@@ -3,5 +3,7 @@
     "year_end": 1999,
     "window": 20,
     "sample_size_words": 500,
-    "sample_size_time": 10
+    "sample_size_time": 10,
+    "categorematic_file": "categorematic-B.csv",
+    "syncategorematic_file": "syncategorematic.csv"
 }

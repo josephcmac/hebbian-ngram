@@ -52,7 +52,12 @@
     "bitset": "cpp",
     "map": "cpp",
     "regex": "cpp",
-    "cinttypes": "cpp"
+    "cinttypes": "cpp",
+    "any": "cpp",
+    "set": "cpp",
+    "optional": "cpp",
+    "iomanip": "cpp",
+    "variant": "cpp"
   },
   "C_Cpp_Runner.msvcBatchPath": "",
   "C_Cpp_Runner.cCompilerPath": "gcc",

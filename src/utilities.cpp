@@ -185,7 +185,7 @@ double Utilities::wire(const unsigned int &i, const unsigned int &j, const doubl
     }
     if (tau.size() == 0)
     {
-        return (-2);
+        return (-2.0);
     }
     else
     {

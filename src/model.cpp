@@ -2,10 +2,21 @@
 #include <cmath>
 #define MINYEAR 1500
 
-void Model::processJsonDocument(const char *filename)
+
+void Model::processJsonDocument()
 {
     // Read the JSON document
-    rapidjson::Document document = processor.readJson(filename);
+    std::ifstream file(parameters);
+    rapidjson::IStreamWrapper stream(file);
+    rapidjson::Document document;
+    document.ParseStream(stream);
+
+
+    // Check if parsing succeeded
+    if (document.HasParseError()) {
+        // Handle parse error
+    }
+
 
     // Extract the values from the JSON document
     yearStart = document["year_start"].GetInt() - MINYEAR;
@@ -13,14 +24,21 @@ void Model::processJsonDocument(const char *filename)
     window = document["window"].GetInt();
     sampleSizeWords = document["sample_size_words"].GetInt();
     sampleSizeTime = document["sample_size_time"].GetInt();
+    categorematicFile = document["categorematic_file"].GetString();
+    syncategorematicFile = document["syncategorematic_file"].GetString();
 }
 
-void Model::readCsvDocuments(const char *cat_name, const char *syn_name)
+void Model::readCsvDocuments()
 {
     // Read the CSV documents
-    cat = processor.readData(cat_name);
-    syn = processor.readData(syn_name);
+    const std::string& cat_filename = categorematicFile;
+    const std::string& syn_filename = syncategorematicFile;
+
+    cat = processor.readData(cat_filename);
+    syn = processor.readData(syn_filename);
+
 }
+
 
 void Model::generateSamples()
 {
@@ -65,7 +83,7 @@ void Model::generateSamples()
 
                 f = tool.fire(i, j, t, cat, mSq);
                 w = tool.wire(i, j, t, cat, syn, window);
-                if (w == -2)
+                if (w == -2.0)
                 {
                     fail++;
                 }
@@ -76,7 +94,7 @@ void Model::generateSamples()
                     samples_words++;
                 }
             }
-            if (samples_words == sampleSizeWords)
+            if (fail < fail_max)
             {
                 corr_list.push_back(tool.kendall_tau(fire_list, wire_list));
                 time_list.push_back(t);
@@ -88,8 +106,8 @@ void Model::generateSamples()
 
 void Model::run()
 {
-    processJsonDocument(parameters);
-    readCsvDocuments(categorematicFile, syncategorematicFile);
+    processJsonDocument();
+    readCsvDocuments();
     generateSamples();
     tool.output(time_list, corr_list);
 }

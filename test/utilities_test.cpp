@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include "../include/utilities.h"
+#include <cmath>
 
 // Use a fixture to set up the Utilities instance
 class UtilitiesTest : public ::testing::Test
@@ -147,3 +148,51 @@ TEST_F(UtilitiesTest, HandlesLargeArray)
   EXPECT_EQ(count, static_cast<size_t>(arr.size() * (arr.size() - 1) / 2)); // A reverse sorted array should have maximum inversions
 }
 
+// Test cases for kendall_tau
+
+// Test with identical vectors
+TEST_F(UtilitiesTest, KendallTauHandlesIdenticalVectors) {
+    std::vector<double> x = {1.0, 2.0, 3.0, 4.0, 5.0};
+    std::vector<double> y = {1.0, 2.0, 3.0, 4.0, 5.0};
+    double tau = u.kendall_tau(x, y);
+    EXPECT_NEAR(tau, 1.0, 1e-9); // Kendall's Tau of identical vectors should be 1
+}
+
+// Test with completely reversed vectors
+TEST_F(UtilitiesTest, KendallTauHandlesReversedVectors) {
+    std::vector<double> x = {1.0, 2.0, 3.0, 4.0, 5.0};
+    std::vector<double> y = {5.0, 4.0, 3.0, 2.0, 1.0};
+    double tau = u.kendall_tau(x, y);
+    EXPECT_NEAR(tau, -1.0, 1e-9); // Kendall's Tau of completely reversed vectors should be -1
+}
+
+// Test with vectors of different lengths
+TEST_F(UtilitiesTest, KendallTauThrowsWhenDifferentLengths) {
+    std::vector<double> x = {1.0, 2.0, 3.0, 4.0};
+    std::vector<double> y = {1.0, 2.0, 3.0, 4.0, 5.0};
+    EXPECT_THROW(u.kendall_tau(x, y), std::invalid_argument); // Should throw std::invalid_argument
+}
+
+// Test with empty vectors
+TEST_F(UtilitiesTest, KendallTauHandlesEmptyVectors) {
+    std::vector<double> x = {};
+    std::vector<double> y = {};
+    double tau = u.kendall_tau(x, y);
+    EXPECT_TRUE(std::isnan(tau)); // Kendall's Tau of empty vectors should be NaN
+}
+
+// Test with one-element vectors
+TEST_F(UtilitiesTest, KendallTauHandlesOneElementVectors) {
+    std::vector<double> x = {1.0};
+    std::vector<double> y = {1.0};
+    double tau = u.kendall_tau(x, y);
+    EXPECT_TRUE(std::isnan(tau)); // Kendall's Tau of one-element vectors should be NaN
+}
+
+// Test with some random vectors
+TEST_F(UtilitiesTest, KendallTauHandlesRandomVectors) {
+    std::vector<double> x = {1.0, 3.0, 5.0, 7.0, 9.0};
+    std::vector<double> y = {2.0, 4.0, 5.0, 8.0, 10.0};
+    double tau = u.kendall_tau(x, y);
+    EXPECT_NEAR(tau, 1.0, 1e-9); // Kendall's Tau should be calculated correctly
+}
