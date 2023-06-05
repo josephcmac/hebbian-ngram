@@ -42,3 +42,6 @@
 *.Rproj
 .DS_Store
 
+
+# images
+*.png

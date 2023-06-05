@@ -159,15 +159,13 @@ double Utilities::wire(const unsigned int &i, const unsigned int &j, const doubl
                        const std::vector<std::vector<double>> &syn,
                        const unsigned int &window)
 {
-    unsigned int t_end;
+    unsigned int t, t_end = t_start + window;
     std::vector<double> tau = {};
-    unsigned int t;
 
     for (unsigned int k = 0; k < syn.size(); k++)
     {
         std::vector<double> x = {};
         std::vector<double> y = {};
-        t_end = t_start + window;
         t = t_start;
         while (t <= t_end)
         {

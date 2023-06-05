@@ -1,3 +1,9 @@
+# Directory of the project
+DIR <- "/home/caballero/Desktop/"
+
+# Words to download
+WORDS <- c("France", "bon", "Angleterre", "d'accord")
+
 # Packages
 required_packages <- c("tidyverse", "future.apply")
 new_packages <- required_packages[!(required_packages %in% 
@@ -37,9 +43,10 @@ extract_ngram_data <- function(words, year_start, year_end, corpus, file_path) {
 }
 
 # Call the function to extract N-gram data for specific words
-extract_ngram_data(words = c("France", "bon", "Angleterre", "d'accord"), 
+extract_ngram_data(words = WORDS, 
                    year_start = 1500, 
                    year_end = 2019, 
                    corpus = "fr-2019",
                    # file_path is the path where the files will be saved
-                   file_path = "/home/caballero/Desktop/hebbian-ngram/data/auxiliary")
+                   file_path = paste0(DIR, "hebbian-ngram/data/auxiliary")
+)
