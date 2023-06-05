@@ -40,7 +40,7 @@ private:
     const char* parameters = "../data/input/parameters.json";
     const char* categorematicFile;
     const char* syncategorematicFile;
-    const unsigned int fail_max = 20;
+    const unsigned int fail_max = 100;
 
 };
 
