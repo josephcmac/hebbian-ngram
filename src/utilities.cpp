@@ -3,59 +3,75 @@
 #include <vector>
 #include <stdexcept>
 
-// Helper function for counting inversions
-size_t Utilities::mergeAndCount(std::vector<std::pair<double, double>>& arr, size_t low, size_t mid, size_t high) {
-    size_t count = 0;
-    size_t i = low, j = mid, k = 0;
-    std::vector<std::pair<double, double>> temp(high - low);
+// Helper function to merge sub-arrays and count inversions
+size_t Utilities::mergeSubarraysAndCountInversions(std::vector<std::pair<double, double>> &arr, size_t start, size_t middle, size_t end)
+{
+    size_t inversionCount = 0;
+    size_t i = start, j = middle, k = 0;
+    std::vector<std::pair<double, double>> tempArr(end - start);
 
-    while (i < mid && j < high) {
-        if (arr[i].second <= arr[j].second) {
-            temp[k++] = arr[i++];
-        } else {
-            temp[k++] = arr[j++];
-            count += mid - i;
+    // Merge two sorted sub-arrays and count inversions
+    while (i < middle && j < end)
+    {
+        if (arr[i].second <= arr[j].second)
+        {
+            tempArr[k++] = arr[i++];
+        }
+        else
+        {
+            tempArr[k++] = arr[j++];
+            inversionCount += middle - i;
         }
     }
 
-    while (i < mid) {
-        temp[k++] = arr[i++];
+    // Copy remaining elements from the first sub-array (if any)
+    while (i < middle)
+    {
+        tempArr[k++] = arr[i++];
     }
 
-    while (j < high) {
-        temp[k++] = arr[j++];
+    // Copy remaining elements from the second sub-array (if any)
+    while (j < end)
+    {
+        tempArr[k++] = arr[j++];
     }
 
-    for (i = low; i < high; i++) {
-        arr[i] = temp[i - low];
-    }
+    // Copy the merged elements back into the original array
+    std::copy(tempArr.begin(), tempArr.end(), arr.begin() + start);
 
-    return count;
+    return inversionCount;
 }
 
-// Recursive function to count inversions
-size_t Utilities::countInversions(std::vector<std::pair<double, double>>& arr, size_t low, size_t high) {
-    if (high - low <= 1)
+// Function to count inversions in the array using merge sort
+size_t Utilities::countInversionsWithMergeSort(std::vector<std::pair<double, double>> &arr, size_t start, size_t end)
+{
+    if (end - start <= 1)
         return 0;
 
-    size_t mid = (low + high) / 2;
+    size_t middle = start + (end - start) / 2;
 
-    size_t count = countInversions(arr, low, mid) + countInversions(arr, mid, high);
+    // Recursively count inversions in left and right halves
+    size_t inversionCount = countInversionsWithMergeSort(arr, start, middle) +
+                            countInversionsWithMergeSort(arr, middle, end);
 
-    count += mergeAndCount(arr, low, mid, high);
+    // Count inversions that span the two halves
+    inversionCount += mergeSubarraysAndCountInversions(arr, start, middle, end);
 
-    return count;
+    return inversionCount;
 }
 
-double Utilities::kendall_tau(const std::vector<double>& x, const std::vector<double>& y) {
-    if (x.size() != y.size()) {
+double Utilities::kendall_tau(const std::vector<double> &x, const std::vector<double> &y)
+{
+    if (x.size() != y.size())
+    {
         throw std::invalid_argument("Lists must have the same length.");
     }
 
     size_t n = x.size();
     std::vector<std::pair<double, double>> arr(n);
 
-    for (size_t i = 0; i < n; i++) {
+    for (size_t i = 0; i < n; i++)
+    {
         arr[i] = std::make_pair(x[i], y[i]);
     }
 
@@ -63,15 +79,13 @@ double Utilities::kendall_tau(const std::vector<double>& x, const std::vector<do
     std::sort(arr.begin(), arr.end());
 
     // Count inversions in y
-    size_t inversions = countInversions(arr, 0, n);
+    size_t inversions = countInversionsWithMergeSort(arr, 0, n);
 
     // Calculate Kendall's Tau
     double tau = 1.0 - 2.0 * inversions / (n * (n - 1) / 2.0);
 
     return tau;
 }
-
-
 
 void Utilities::output(const std::vector<double> &t, const std::vector<double> &correlation)
 {
@@ -169,9 +183,12 @@ double Utilities::wire(const unsigned int &i, const unsigned int &j, const doubl
             tau.push_back(kendall_tau(x, y));
         }
     }
-    if (tau.size() == 0) {
-        return (- 2);
-    } else {
+    if (tau.size() == 0)
+    {
+        return (-2);
+    }
+    else
+    {
         return findMedian(tau);
     }
 }
