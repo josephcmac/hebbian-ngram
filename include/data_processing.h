@@ -5,7 +5,7 @@
 #define COMMON_PATH_INPUT "../data/input/"
 #define COMMON_PATH_AUXILIARY "../data/auxiliary/"
 
-
+#pragma once
 #include <vector>
 #include <string>
 #include <iostream>
@@ -23,8 +23,6 @@ private:
     std::vector<std::string> fileNames(const std::string& filename);
     std::vector<std::vector<double>> readDataFrame(const std::vector<std::string>& filenames);
 };
-
-#include "../src/data_processing.cpp"
 
 
 #endif // DATA_PROCESSING_H

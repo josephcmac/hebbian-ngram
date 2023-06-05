@@ -1,6 +1,7 @@
 #ifndef UTILITIES_H
 #define UTILITIES_H
 
+#pragma once
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -17,14 +18,14 @@ public:
                        const std::vector<std::vector<double>> &cat,
                        const std::vector<std::vector<double>> &syn,
                        const unsigned int &window);
+    double findMedian(const std::vector<double>& list);
+
 
 private:
     const char *outputFileName = "../data/output/output.csv";
-    double findMedian(const std::vector<double>& list);
     size_t mergeAndCount(std::vector<std::pair<double, double>>& arr, size_t low, size_t mid, size_t high);
     size_t countInversions(std::vector<std::pair<double, double>>& arr, size_t low, size_t high);
 };
 
-#include "../src/utilities.cpp"
 
 #endif // UTILITIES_H

@@ -1,6 +1,7 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+#pragma once
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -38,8 +39,6 @@ private:
     const unsigned int fail_max = 20;
 
 };
-
-#include "../src/model.cpp"
 
 
 #endif  // MODEL_H
