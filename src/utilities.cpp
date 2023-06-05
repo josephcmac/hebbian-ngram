@@ -151,34 +151,38 @@ double Utilities::syncategorematic_median(const unsigned int &t, const std::vect
 double Utilities::fire(const unsigned int &i, const unsigned int &j, const unsigned int &t,
                        const std::vector<std::vector<double>> &cat, const double &mSq)
 {
-    return cat[i][t] * cat[j][t] / mSq; // m is the squared median of syn[k, t] for all k
+    return cat[i][t] * cat[j][t] / mSq; // mSq is the squared median of syn[k, t] for all k
 }
 
-double Utilities::wire(const unsigned int &i, const unsigned int &j, const double &t,
+double Utilities::wire(const unsigned int &i, const unsigned int &j, const double &t_start,
                        const std::vector<std::vector<double>> &cat,
                        const std::vector<std::vector<double>> &syn,
                        const unsigned int &window)
 {
+    unsigned int t_end;
     std::vector<double> tau = {};
+    unsigned int t;
 
     for (unsigned int k = 0; k < syn.size(); k++)
     {
         std::vector<double> x = {};
         std::vector<double> y = {};
-
-        for (unsigned int tt = t; tt <= t + window; tt++)
+        t_end = t_start + window;
+        t = t_start;
+        while (t <= t_end)
         {
-            if (syn[k][tt] == 0)
+            if (syn[k][t] == 0)
             {
                 break;
             }
             else
             {
-                x.push_back(cat[i][tt] / syn[k][tt]);
-                y.push_back(cat[j][tt] / syn[k][tt]);
+                x.push_back(cat[i][t] / syn[k][t]);
+                y.push_back(cat[j][t] / syn[k][t]);
             }
+            t++;
         }
-        if (x.size() == window)
+        if (t > t_end)
         {
             tau.push_back(kendall_tau(x, y));
         }

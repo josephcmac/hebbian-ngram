@@ -64,7 +64,6 @@ void Model::generateSamples()
     unsigned int t, fail;
     double mSq, f, w;
 
-    // std::cout << "Year: " << 1500 + t << std::endl;
     while (samples_time < sampleSizeTime)
     {
         t = dist_year(gen);
@@ -94,7 +93,7 @@ void Model::generateSamples()
                     samples_words++;
                 }
             }
-            if (fail < fail_max)
+            if (samples_words == sampleSizeWords)
             {
                 corr_list.push_back(tool.kendall_tau(fire_list, wire_list));
                 time_list.push_back(t);
