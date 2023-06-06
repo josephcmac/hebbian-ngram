@@ -43,7 +43,7 @@ void Model::readCsvDocuments()
 void Model::generateSamples()
 {
     // Vectors for fire and wire
-    std::vector<double> fire_list = {}, wire_list = {};
+    std::vector<double> fire_list, wire_list;
     corr_list = {};
     time_list = {};
 
@@ -72,6 +72,8 @@ void Model::generateSamples()
         if (mSq != 0)
         {
             fail = 0;
+            fire_list = {};
+            wire_list = {};
             while ((samples_words < sampleSizeWords) & (fail < fail_max))
             {
                 i = dist_cat(gen); // first categorematic expression

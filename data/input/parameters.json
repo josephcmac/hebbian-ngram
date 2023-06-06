@@ -1,9 +1,9 @@
 {
-    "year_start": 1900,
+    "year_start": 1899,
     "year_end": 1999,
     "window": 20,
     "sample_size_words": 1000,
-    "sample_size_time": 50,
-    "categorematic_file": "categorematic-B.csv",
+    "sample_size_time": 1000,
+    "categorematic_file": "categorematic-mix.csv",
     "syncategorematic_file": "syncategorematic.csv"
 }
