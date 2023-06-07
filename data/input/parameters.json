@@ -4,6 +4,6 @@
     "window": 20,
     "sample_size_words": 1000,
     "sample_size_time": 1000,
-    "categorematic_file": "categorematic-mix.csv",
-    "syncategorematic_file": "syncategorematic.csv"
+    "categorematic_file": "categorematic-random.csv",
+    "syncategorematic_file": "syncategorematic-random.csv"
 }

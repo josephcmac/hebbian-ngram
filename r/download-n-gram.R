@@ -1,8 +1,28 @@
 # Directory of the project
 DIR <- "/home/caballero/Desktop/"
 
+# corpus of Google Ngram to download
+corpus <- "es-2019"
+
 # Words to download
-WORDS <- c("France", "bon", "Angleterre", "d'accord")
+WORDS <- c("el", "la", "los", "las", "un",
+           "una", "unos", "unas", "y", "ni",
+           "o", "pero", "sino", "aunque", "porque",
+           "si", "para", "por", "con", "de",
+           "en", "sobre", "bajo", "tras", "durante",
+           "mediante", "yo", "tú", "él", "ella",
+           "usted", "nosotros", "vosotros", "ellos", "ellas",
+           "ustedes", "mi", "tu", "su", "nuestro",
+           "vuestro", "este", "esta", "estos", "estas",
+           "ese", "esa", "esos", "esas", "aquel",
+           "aquella", "aquellos", "aquellas", "que", "quien",
+           "quienes", "cual", "cuales", "cuyo", "cuya",
+           "cuyos", "cuyas", "sí", "no", "tal vez",
+           "quizás", "también", "tampoco", "aquí", "ahí",
+           "allí", "ahora", "antes", "después", "hola",
+           "adiós", "gracias", "por favor", "además", "entonces",
+           "luego", "por lo tanto", "sin embargo", "por otro lado", "en conclusión",
+           "finalmente")
 
 # Packages
 required_packages <- c("tidyverse", "future.apply")
@@ -46,7 +66,7 @@ extract_ngram_data <- function(words, year_start, year_end, corpus, file_path) {
 extract_ngram_data(words = WORDS, 
                    year_start = 1500, 
                    year_end = 2019, 
-                   corpus = "fr-2019",
+                   corpus = corpus,
                    # file_path is the path where the files will be saved
                    file_path = paste0(DIR, "hebbian-ngram/data/auxiliary")
 )
